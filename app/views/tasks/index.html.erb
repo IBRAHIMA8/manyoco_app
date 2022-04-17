@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.content %></td>
+        <td><%= link_to 'Show', task %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'New Task', new_task_path %>
+
+<br><br>
+
+<h1>Tasks List</h1>
+
+  <table class="text-md-left table-striped">
+    <thead>
+      <%= form_with(model: @task, method: :get, local: true, url: tasks_path) do |form| %>
+        <tr>
+          <td> Title search <%= form.text_field :title %></td>
+          <td> Status search <%= form.select :status, ['', 'pending', 'started', 'completed'], {} %></td>
+          <td> Label search <%= form.select :priority, ['', 'low', 'medium', 'high'], {} %></td>
+          <td> Sort by deadline <%= form.select :deadline, ['', tasks_path(sort_datetime: "true")], {} %></td>
+        </tr>
+      <% end %>
+    </thead><br><br>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+         <td><%= task.title %></td>
+         <td><%= task.status %></td>
+         <td><%= task.priority %></td>
+         <td><%= task.deadline.strftime('%Y/%-m/%-d') %></td>
+         <td><%= link_to 'Show', task %></td>
+         <td><%= link_to 'Edit', edit_task_path(task) %></td>
+         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+<button class="btn"><%= link_to 'Register a task', new_task_path %></button>  <button><%= link_to 'Sort by deadline', tasks_path(sort_deadline: "true") %></button>
