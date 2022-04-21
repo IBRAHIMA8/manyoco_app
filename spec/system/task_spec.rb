@@ -45,9 +45,9 @@ end
   end
 end
 
-  describe 'Detailed tasks list' do
+  describe 'Detailed list in descending order of tasks' do
     context 'When tasks are arranged in descending order of creation date and time' do
-      it 'list tasks sorted in descending order of creation date' do
+      it 'List of tasks sorted in descending order of creation date' do
         visit tasks_path
         assert Task.all.order('created_at desc')
       end
