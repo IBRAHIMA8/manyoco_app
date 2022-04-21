@@ -21,7 +21,7 @@ Considering that you have an account on Heroku Website
 
   - $ heroku Create
 
-3. The next step is to add all contain of your application on your heroku by following those step:
+3. The next step is to add all contain of your application on your heroku by following steps:
 
   - $ git add .
 
