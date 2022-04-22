@@ -49,7 +49,6 @@ end
     context 'When tasks are arranged in descending order of creation date and time' do
       it 'List of tasks sorted in descending order of creation date' do
         visit tasks_path
-        click_on "Sort by creation"
         assert Task.all.order('created_at desc')
       end
     end
