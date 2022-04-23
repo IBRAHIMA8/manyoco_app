@@ -24,7 +24,7 @@
   </tbody>
 </table>
 <br>
-<%= link_to 'New Task', new_task_path %>
+<%= link_to 'Create New Task', new_task_path %>
 
 <br><br>
 
@@ -34,17 +34,24 @@
     <thead>
       <%= form_with(model: @task, method: :get, local: true, url: tasks_path) do |form| %>
         <tr>
+          <td> No.</td>
           <td> Title search <%= form.text_field :title %></td>
           <td> Status search <%= form.select :status, ['', 'pending', 'started', 'completed'], {} %></td>
-          <td> Label search <%= form.select :priority, ['', 'low', 'medium', 'high'], {} %></td>
+          <td> Pariorty search <%= form.select :priority, ['', 'low', 'medium', 'high'], {} %></td>
           <td> Sort by deadline <%= form.select :deadline, ['', tasks_path(sort_datetime: "true")], {} %></td>
         </tr>
       <% end %>
     </thead><br><br>
+
+
+
+
+
     <tbody>
       <% @tasks.each do |task| %>
         <tr>
-         <td><%= task.title %></td>
+        
+          <td><%= link_to task.title ,task_path(task.id) %></td>
          <td><%= task.status %></td>
          <td><%= task.priority %></td>
          <td><%= task.deadline.strftime('%Y/%-m/%-d') %></td>
@@ -55,4 +62,3 @@
       <%end%>
     </tbody>
   </table>
-<button class="btn"><%= link_to 'Register a task', new_task_path %></button>  <button><%= link_to 'Sort by deadline', tasks_path(sort_deadline: "true") %></button>
