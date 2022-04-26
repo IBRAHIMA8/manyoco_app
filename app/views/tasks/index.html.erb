@@ -1,4 +1,6 @@
+
 <p id="notice"><%= notice %></p>
+
 <h1>Tasks</h1>
 <div class="container shadow">
 <table>
@@ -23,12 +25,12 @@
   </tbody>
 </table>
 <br>
-<%= link_to 'Create New Task', new_task_path %>
+<%= link_to 'Create New Task', new_task_path, class: 'btn btn-primary text-light' %>
 
 <br><br>
 <h1>Do your research here</h1>
   <table class="text-md-left table-striped">
-    <thead>
+
       <tr>
         <div class="row py-3">
           <div class="col sm-3">
@@ -47,9 +49,10 @@
           </div>
         </div>
       </tr>
-    </thead>
+    </table
+
     <br><br>
-    <tbody>
+    <table>
     <h1>General Tasks List</h1>
       <% @tasks.each do |task| %>
         <tr>
@@ -62,8 +65,11 @@
          <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <%end%>
-    </tbody>
+
   </table>
+  <div>
   <%= link_to "Sort by Deadline", tasks_path(sort_expired: "true") ,class: 'col btn btn-secondary text-light'%> |
   <%= link_to "Sort by Priority", tasks_path(sort_by_priority: "true") ,class: 'col btn btn-secondary text-light'%>
-</div>
+  <hr>
+    <%= paginate @tasks, class:"mt-5" %>
+  </div>

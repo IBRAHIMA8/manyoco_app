@@ -10,6 +10,7 @@ class TasksController < ApplicationController
       else
         @tasks = Task.all.ordered
       end
+      @tasks = Task.page(params[:page]).per(5)
     end
 
   def show
@@ -86,7 +87,7 @@ class TasksController < ApplicationController
         elsif session[:search]['priority'].present?
           Task.priority_sort(session[:search]['priority']).kaminari(params[:page])
         else
-          Tak.kaminari(params[:page])
+          Task.kaminari(params[:page])
         end
       end
     end
