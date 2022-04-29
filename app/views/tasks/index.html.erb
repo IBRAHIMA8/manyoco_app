@@ -1,6 +1,4 @@
-
 <p id="notice"><%= notice %></p>
-
 <h1>Tasks</h1>
 <div class="container shadow">
 <table>
@@ -30,7 +28,6 @@
 <br><br>
 <h1>Do your research here</h1>
   <table class="text-md-left table-striped">
-
       <tr>
         <div class="row py-3">
           <div class="col sm-3">
@@ -52,20 +49,38 @@
     </table
 
     <br><br>
-    <table>
     <h1>General Tasks List</h1>
+
+    <table class="table">
+
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th>Deadline</th>
+      <th>Author</th>
+      <th colspan="3"></th>
+    </tr>
+</thead>
+
+
+      <tbody>
       <% @tasks.each do |task| %>
         <tr>
         <td><%= link_to task.title ,task_path(task.id) %></td>
+        <td><%= task.content %></td>
          <td><%= task.status %></td>
          <td><%= task.priority %></td>
          <td><%= task.deadline.strftime('%Y/%-m/%-d') %></td>
-         <td><%= link_to 'Show', task %></td>
-         <td><%= link_to 'Edit', edit_task_path(task) %></td>
-         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         <td><%= User.find(task.user_id).name%></td>
+        <td><%= link_to 'Show', task ,class:'btn btn-primary'%></td>
+        <td><%= link_to 'Edit', edit_task_path(task), class:'btn btn-warning'%></td>
+      <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } ,class:'btn btn-danger'%></td>
         </tr>
       <%end%>
-
+    </tbody>
   </table>
   <div>
   <%= link_to "Sort by Deadline", tasks_path(sort_expired: "true") ,class: 'col btn btn-secondary text-light'%> |

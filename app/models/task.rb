@@ -14,4 +14,5 @@ class Task < ApplicationRecord
   scope :priority_sort, -> (search_priority){ where(priority: search_priority) }
   scope :sort_expired, -> { order(deadline: :desc) }
   scope :kaminari, -> (kaminari_page){ page(kaminari_page).per(5) }
+  scope :current_user_sort,->(current_user_id){where(user_id: current_user_id)}
 end
