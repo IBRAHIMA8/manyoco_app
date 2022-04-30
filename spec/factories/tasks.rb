@@ -5,6 +5,7 @@ FactoryBot.define do
     deadline { '2022-03-30 20:00:00' }
     status { 'started' }
     priority { 'low' }
+    user_id {1}
   end
 
   factory :second_task, class: Task do
@@ -13,6 +14,7 @@ FactoryBot.define do
     deadline { '2022-03-30 20:00:00' }
     status { 'started' }
     priority { 'low' }
+    user_id {1}
   end
   factory :third_task, class: Task do
     title { 'test 3' }
@@ -20,5 +22,6 @@ FactoryBot.define do
     deadline { '2022-03-30 20:00:00' }
     status { 'completed' }
     priority { 'high' }
+    user_id {1}
 end
 end

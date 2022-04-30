@@ -1,34 +1,64 @@
+<style>
+  strong{
+    font-size: 20px;
+    font-family: fantasy;
+    color: black;
+  }
+
+  span{
+    color: black;
+    font-size: 18px;
+    font-family: 'Lucida';
+  }
+
+
+</style>
+<div class="container">
+ <div class="container">
+  <div class="card container">
 <p id="notice"><%= notice %></p>
 
 <p>
   <strong>Title:</strong>
-  <%= @task.title %>
+  <span><%= @task.title %></span>
 </p>
 
 <p>
   <strong>Content:</strong>
-  <%= @task.content %>
+  <span><%= @task.content %></span>
 </p>
 
 
 <p>
   <strong>Deadline:</strong>
-<%= @task.deadline %>
+  <span><%= @task.deadline %></span>
 </p>
 
 
 <p>
   <strong>Status:</strong>
-  <%= @task.status %>
+  <span> <%= @task.status %></span>
+
 </p>
 
 
 <p>
   <strong>Priority:</strong>
-  <%= @task.priority %>
+  <span><%= @task.priority %></span>
 </p>
 
+<p>
+   <strong>Label assigned:</strong>
+ <% if @task.labels.present? %>
+           <% @task.labels.each do |l| %>
+             <span class="label"><%= l.name %></span>
+           <% end %>
+ <% end %>
+ </p>
 
+ <%= link_to 'Edit', edit_task_path(@task) ,class: 'col btn btn-secondary text-light'%>
+ <%= link_to 'Back', tasks_path ,class: 'col btn btn-secondary text-light'%>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+    </div>
+  </div>
+</div>

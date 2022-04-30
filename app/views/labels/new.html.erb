@@ -1,0 +1,12 @@
+<div class="container">
+  <%= form_with(model: @label, local: true) do |f| %>
+    <div class="label_form_name">
+      <%= f.label :name, 'New Label Name' %>
+      <%= f.text_field :name %>
+    </div>
+    <br><br>
+    <div class="label_form_submit">
+      <%= f.submit 'Save' %>
+    </div>
+  <% end %>
+</div>
