@@ -26,9 +26,9 @@
 <%= link_to 'Create New Task', new_task_path, class: 'btn btn-primary text-light' %>
 
 <br><br>
+<div class="container shadow">
 <h1>Do your research here</h1>
-  <table class="text-md-left table-striped">
-      <tr>
+
         <div class="row py-3">
           <div class="col sm-3">
             <div class="col">
@@ -40,13 +40,13 @@
               <% end %>
                 <%= f.select :search_status, Task.statuses.map { |k, v| [k, v] }, class: 'search_status form-control', prompt: 'status'%>
                 <%= f.select :search_priority, Task.priorities.map { |k, v| [k, v] }, class: 'search_priority form-control', prompt: 'priority'%>
-                <%= f.submit 'search' %>
+                <%= f.select :search_label, @labels.collect { |p| [p.name, p.id]}, class: "search_label", prompt: 'Assigned Label' %>
+                <%= f.submit 'search' ,class:'btn btn-light'%>
               <% end %>
             </div>
           </div>
         </div>
-      </tr>
-    </table
+    <div class="container py-3">
 
     <br><br>
     <h1>General Tasks List</h1>
@@ -59,8 +59,10 @@
       <th>Content</th>
       <th>Status</th>
       <th>Priority</th>
+      <th>Assigned Label</th>
       <th>Deadline</th>
       <th>Author</th>
+
       <th colspan="3"></th>
     </tr>
 </thead>
@@ -73,8 +75,12 @@
         <td><%= task.content %></td>
          <td><%= task.status %></td>
          <td><%= task.priority %></td>
+         <td><% task.labels.each do |label| %>
+                [<%= label.name %>]
+              <% end %></td>
          <td><%= task.deadline.strftime('%Y/%-m/%-d') %></td>
          <td><%= User.find(task.user_id).name%></td>
+
         <td><%= link_to 'Show', task ,class:'btn btn-primary'%></td>
         <td><%= link_to 'Edit', edit_task_path(task), class:'btn btn-warning'%></td>
       <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } ,class:'btn btn-danger'%></td>
@@ -84,7 +90,8 @@
   </table>
   <div>
   <%= link_to "Sort by Deadline", tasks_path(sort_expired: "true") ,class: 'col btn btn-secondary text-light'%> |
-  <%= link_to "Sort by Priority", tasks_path(sort_by_priority: "true") ,class: 'col btn btn-secondary text-light'%>
+  <%= link_to "Sort by Priority", tasks_path(sort_by_priority: "true") ,class: 'col btn btn-secondary text-light'%> |
+  <%= link_to 'Add New Label', new_label_path ,class: 'btn btn-primary text-light'%>
   <hr>
     <%= paginate @tasks, class:"mt-5" %>
   </div>
